@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="card" *ngIf="product">
+    <div class="card-title">
+      <h3>Ten san pham: {{product.name}}</h3>
+    </div>
+    <div class="row">
+       <div class="card-body">
+      <img src="https://vegibit.com/wp-content/uploads/2018/12/angular-interface-ts-file.png" alt="xxx" class="col-2">
+      <div class="card-body-info col-md-3">
+        <h5>Giá : {{product.price | currency}}</h5>
+      <h5>Số lượng: {{product.quantity}} </h5>
+      <p>Mô tả: {{product.description}}</p>
+      <button class="btn btn-success" (click)="addtocart(product)">Thêm vào giỏ hàng</button>
+      </div>
+    </div>
+    </div>
+
+  </div>
+</div>
+
+
+<button class="btn btn-success" (click)="GoToList()">  Go to list</button>

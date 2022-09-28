@@ -1,0 +1,15 @@
+
+<div class="container">
+  <div class="row">
+    <ng-container *ngFor="let i of productList">
+      <div class="card col-md-3" >
+      <img src="https://img.lovepik.com/element/40023/8445.png_860.png" alt="error img" [routerLink]="['/product-detail',i.id]">
+      <h5 style="white-space:nowrap ; overflow:hidden;text-overflow:ellipsis;max-width:100ch;">{{i.name}}</h5>
+      <p style="white-space:nowrap ; overflow:hidden;text-overflow:ellipsis;max-width:60ch;">{{i.description}}</p>
+      <p>Price: {{i.price}} </p>
+      <button class="btn btn-primary" (click)="addtoCart(i)">Add to cart</button>
+    </div>
+    </ng-container>
+
+  </div>
+</div>
