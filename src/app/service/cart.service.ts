@@ -14,41 +14,42 @@ export class CartService {
   }
 
 
-  public cartItem: Product[] = [];
-
+  public cartData: Product[] = [];
 
   public totalItems = new BehaviorSubject<any>([]);
 
   addtoCart(product: Product) {
     let exist : any;
-    if(this.cartItem.length > 0){
-      exist = this.cartItem.find((item)=>{
+    if(this.cartData.length > 0){
+      exist = this.cartData.find((item)=>{
         return item.id === product.id;
         console.log(exist);
       });
       if(exist){
         exist.quantity +=1;
         console.log(exist.quantity);
-        console.log('cart when exist = true :', this.cartItem);
+        console.log('cart when exist = true :', this.cartData);
       }else{
-        this.cartItem.push(product);
-        this.totalItems.next(this.cartItem);
+        this.cartData.push(product);
+        product.quantity = 1;
+        this.totalItems.next(this.cartData);
         console.log('total when exist = false :', this.totalItems);
-        console.log('cart when exist = false :', this.cartItem);
+        console.log('cart when exist = false :', this.cartData);
       }
     }else{
-      this.cartItem.push(product);
-      this.totalItems.next(this.cartItem);
+      this.cartData.push(product);
+      product.quantity = 1;
+      this.totalItems.next(this.cartData);
 
     }
 
-      console.log('cart items: ',this.cartItem);
+      console.log('cart items: ',this.cartData);
       console.log('total: ',this.totalItems);
   }
 
 
   setCartData(data: any) {
-    this.cartItem.push(...data);
+    this.cartData.push(...data);
     this.totalItems.next(data);
   }
   getCartData() {
@@ -62,19 +63,19 @@ export class CartService {
     return grandTotal;
   }
 
-  removeCartItem(product: any) {
-
+  removeItem(product: Product) {
+    this.cartData.map((item : any, index : any) =>{
+      if(product.id === item.id){
+        this.cartData.splice(index,1);
+        this.totalItems.next(this.cartData);
+      }
+    });
 
   }
 
   clearCart() {
-    this.cartItem = [];
+    this.cartData = [];
+    this.totalItems.next(this.cartData);
   }
 
-  getcountitem() {
-    this.cartItem.length;
-  }
-  getItemCart() {
-    return this.cartItem;
-  }
 }

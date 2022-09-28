@@ -3,16 +3,16 @@
 
       <div class="card-table">
         <div class="card-product">
-          <table class="table table-bordered table-hover">
+          <table class="table table-bordered table-hover table-content">
             <thead>
               <tr>
-                <th>Sr.No</th>
-                <th>Product Name</th>
-                <th>Product Image</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
+                <th>STT</th>
+                <th>Tên sản phẩm</th>
+                <th>Hình ảnh</th>
+                <th>Mô tả</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+                <th>Tổng</th>
                 <th></th>
               </tr>
             </thead>
@@ -20,22 +20,31 @@
               <tr *ngFor="let item of cartItem;let i = index">
                 <td>{{i + 1}}</td>
                 <td>{{item.name}}</td>
-                <td> <img src="" alt="img"></td>
+                <td> <img src="https://img.lovepik.com/element/40023/8445.png_860.png" alt="img"></td>
                 <td style="width: 25%" >{{item.description}}</td>
                 <td style="width: 12%">
-                  {{item.price}}
+                  {{item.price | currency : 'USD'}}
                  </td>
                 <td style="width: 12%">
-                  <input type="number" class="qty" [value]=" item.quantity"></td>
-                <td style="width: 12%">total</td>
+                  <input type="number" class="qty" [value]=" item.quantity" (blur)="validateInput($event,i)" style="width:55%;text-align:center;"></td>
+                <td style="width: 12%">{{ item.quantity * item.price | currency : 'USD' }}</td>
                 <td>
                   <i class="fas fa-trash-alt" (click)="removeItem(item)"></i>
                 </td>
               </tr>
               <tr>
-                <td colspan="4"> <strong>Grand Total:   </strong> </td>
-                <td><button class="btn btn-danger" (click)="clear()">Remove All</button></td>
-                <td><button class="btn btn-primary" routerLink="/products">Shop more</button></td>
+                <td colspan="4">  </td>
+                <td><button class="btn btn-danger" (click)="clear()">Xóa tất cả</button></td>
+                <td><button class="btn btn-primary" routerLink="/products">Mua thêm</button></td>
+                <td><button class="btn btn-success" (click)="checkOut()">Thanh toán</button></td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <strong>Tổng: <span> {{totalProduct}} </span> sản phẩm </strong> <br>
+                  <strong>Tổng thanh toán: <span>{{totalPrice | currency : 'USD' }} </span>  </strong> </td>
+                <td></td>
+                <td></td>
+                <td></td>
               </tr>
             </tbody>
           </table>
@@ -51,14 +60,14 @@
   <div class="container">
     <div class="card">
       <h5 class="card-title">
-          My Cart!
+          Giỏ hàng !
       </h5>
     </div>
     <div class="center">
       <img src="https://previews.123rf.com/images/chupakabrajk/chupakabrajk1811/chupakabrajk181101025/113542472-empty-shopping-cart-hand-drawn-sketch-shopping-cart-icon-.jpg" alt="Empty Cart">
-      <h4>Your cart is empty!</h4>
-      <h6>Add item now</h6>
-      <button class="btn btn-primary" routerLink="/products">Show now</button>
+      <h4>Giỏ hàng của bạn đang trống!</h4>
+      <!-- <h6>Thêm sản phẩm mới ngay</h6> -->
+      <button class="btn btn-primary" routerLink="/products">Mua ngay</button>
     </div>
   </div>
 </ng-template>

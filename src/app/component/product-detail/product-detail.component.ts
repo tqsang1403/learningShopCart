@@ -60,7 +60,7 @@ export class ProductDetailComponent implements OnInit {
 
   addtocart(product : Product){
     this.cartService.addtoCart(product);
-    window.alert( 'Product has been added to the cart!');
+    console.log( 'Thêm sản phẩm vào giỏ hàng thành công!');
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit  } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { CartService } from 'src/app/service/cart.service';
 
 @Component({
@@ -17,5 +17,6 @@ export class HeaderComponent implements OnInit {
       this.totalItem = items.length;
     })
   }
+
 
 }
