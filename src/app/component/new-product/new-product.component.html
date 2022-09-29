@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <form class="form-horizontal">
+        <fieldset>
+
+          <!-- Form Name -->
+          <legend style="max-width: fit-content;border-bottom:0.5px rgb(40, 40, 41) solid ;">Thông tin sản phẩm mới
+          </legend>
+
+
+          <!-- Text input-->
+          <div class="form-group">
+            <label class=" control-label" for="product_name">Tên sản phẩm</label>
+            <div class="">
+              <input id="product_name" name="product_name" placeholder="Vui lòng nhập tên sản phẩm"
+                class="form-control input-md" required type="text" [(ngModel)]="product.name">
+
+            </div>
+          </div>
+
+
+
+          <!-- Text input-->
+          <div class="form-group ">
+            <label class=" control-label" for="product_quantity">Số lượng</label>
+            <div class="">
+              <input id="product_quantity" name="product_quantity" placeholder="Nhập số lượng sản phẩm"
+                class="form-control input-md" required type="number" [(ngModel)]="product.quantity">
+
+            </div>
+          </div>
+
+
+          <div class="form-group ">
+            <label class=" control-label" for="product_price">Giá</label>
+            <div class="">
+              <input id="product_price" name="product_price" placeholder="Nhập giá sản phẩm"
+                class="form-control input-md" type="number" [(ngModel)]="product.price">
+
+            </div>
+          </div>
+
+          <!-- Textarea -->
+          <div class="form-group">
+            <label class=" control-label" for="product_description">Mô tả</label>
+            <div class="">
+              <textarea class="form-control" id="product_description" name="product_description"
+                placeholder="Vui lòng nhập mô tả cho sản phẩm" [(ngModel)]="product.description" required></textarea>
+            </div>
+          </div>
+
+
+
+
+          <!-- File Button -->
+          <div class="form-group">
+            <label class=" control-label" for="product_image">Hình ảnh</label>
+            <div class="">
+              <input id="product_image" name="product_image" placeholder="Copy link ảnh dán vào đây"
+                class="form-control input-md" type="text" (blur)="on_press_key($event)">
+              <!-- <input id="product_image" name="product_image" class="input-file" type="file" [(ngModel)] ="product.imgUrl"> -->
+            </div>
+          </div>
+          <!-- File Button
+      <div class="form-group">
+        <label class=" control-label" for="product_image">auxiliary_images</label>
+        <div class="">
+          <input id="product_image" name="product_image" class="input-file" type="file">
+        </div>
+      </div> -->
+
+          <!-- Button -->
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-3">
+                <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-success" (click)="save()">Lưu lại</button>
+              </div>
+              <div class="col-md-3">
+                <button class="btn btn-primary" (click)="cancel()">Trở lại</button>
+              </div>
+            </div>
+
+          </div>
+        </fieldset>
+      </form>
+    </div>
+
+
+    <!-- div image show -->
+    <div class="container-img col-md-4">
+      <img *ngIf="product.imgUrl;else noImage" [src]="product.imgUrl" id="product_image" name="product_image">
+      <ng-template #noImage></ng-template>
+    </div>
+  </div>
+
+</div>

@@ -42,20 +42,19 @@ export class ProductDetailComponent implements OnInit {
     this.router.navigate(['products']);
   }
 
-  GetIDfromLink(){
-    const routeParams = this.route.snapshot.paramMap;
-    const idfromparams = Number(routeParams.get('id'));
+  // GetIDfromLink(){
+  //   const routeParams = this.route.snapshot.paramMap;
+  //   const idfromparams = Number(routeParams.get('id'));
 
-    this.product = this.api.productList.find(product => product.id === idfromparams);
+  //   this.product = this.api.productList.find(product => product.id === idfromparams);
 
-    console.log(JSON.stringify(this.product));
-    console.log('id from params: ' + idfromparams);
-  }
+  //   console.log(JSON.stringify(this.product));
+  //   console.log('id from params: ' + idfromparams);
+  // }
 
   ngOnDestroy(): void {
     this.subcription = null;
     this._id = 0;
-    console.log(this.subcription + this._id);
   }
 
   addtocart(product : Product){

@@ -45,6 +45,10 @@
   height: 400px;
 }
 
+.btn-add {
+  margin:12px 0;
+}
+
 @media only screen and (max-width:1500px) {
 
   .card img{
@@ -66,5 +70,9 @@
     margin: 12px;
     width: 200px;
     height: 300px;
+  }
+
+  .btn-add {
+    margin:8px 0;
   }
 }

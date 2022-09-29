@@ -1,0 +1,10 @@
+.btn{
+  margin: 12px 0;
+  width: 100%;
+
+}
+.container-img img {
+  width: 450px;
+  height: 450px;
+  object-fit: contain;
+}
