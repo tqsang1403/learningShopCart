@@ -11,6 +11,8 @@ import { ProductsComponent } from './component/products/products.component';
 import { NewProductComponent } from './component/new-product/new-product.component';
 import { FormsModule } from '@angular/forms';
 import { ProductEditComponent } from './component/product-edit/product-edit.component';
+import { ProductManagerComponent } from './component/product-manager/product-manager.component';
+import { Notfound404Component } from './component/notfound404/notfound404.component';
 
 
 
@@ -23,6 +25,8 @@ import { ProductEditComponent } from './component/product-edit/product-edit.comp
     ProductDetailComponent,
     NewProductComponent,
     ProductEditComponent,
+    ProductManagerComponent,
+    Notfound404Component,
 
   ],
   imports: [

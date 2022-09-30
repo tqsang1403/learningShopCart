@@ -30,6 +30,7 @@ h6 {
 td img {
   width: 120px;
   height: 105px;
+  object-fit: contain;
 }
 
 @media only screen and (max-width: 1500px) {

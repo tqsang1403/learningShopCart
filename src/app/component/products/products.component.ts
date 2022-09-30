@@ -7,26 +7,18 @@ import { Product } from './product';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css']
+  styleUrls: ['./products.component.css'],
 })
 export class ProductsComponent implements OnInit {
-
   public productList: Product[] = [];
+  public soluongchon: number = 1;
 
-  constructor(
-    private api: ApiService,
-    private cartService: CartService,
-
-  ) { }
+  constructor(private api: ApiService, private cartService: CartService) {}
 
   ngOnInit(): void {
     this.api.getProduct().subscribe((res: any) => {
       this.productList = res;
-
-    })
-
-
-
+    });
   }
 
   ngOnDestroy(): void {
@@ -34,12 +26,25 @@ export class ProductsComponent implements OnInit {
   }
 
   addtoCart(item: Product) {
+    if (this.soluongchon < 1) {
+      window.alert('Số lượng mua phải lớn hơn 1!');
+    } else {
+      this.cartService.addtoCart(item, this.soluongchon);
 
-    this.cartService.addtoCart(item);
-    console.log( 'Thêm sản phẩm vào giỏ hàng thành công!');
 
+
+      this.soluongchon = 1;
+    }
   }
 
-
-
+  tangsl() {
+    this.soluongchon++;
+  }
+  giamsl() {
+    if (this.soluongchon <= 1) {
+      window.alert('Số lượng mua không thể nhỏ hơn 1');
+    } else {
+      this.soluongchon--;
+    }
+  }
 }

@@ -84,7 +84,7 @@ export class ProductEditComponent implements OnInit {
       ))
   }
   cancel() {
-    this.router.navigate(['products']);
+    history.back();
   }
 
 

@@ -25,22 +25,26 @@ export class ApiService {
 
   addProduct(data: any): Observable<any> {
     return this.http.post<any>(this.url, data).pipe(
-      tap((data : any)=> console.log('add successful ' + JSON.stringify(data))),
-      catchError(error => {return error})
+      tap((data: any) => console.log('add successful ' + JSON.stringify(data))),
+      catchError(error => { return error })
     );
   }
 
   updateProduct(id: number, data: any): Observable<any> {
     const httpOptions = {
-      headers : new HttpHeaders({'Content-Type' : 'application/json'})
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
-    return this.http.put<any>(this.url + '/' + id, data,httpOptions).pipe(
-      tap((data : any)=> console.log('edit successful ' + JSON.stringify(data))),
-      catchError(error => {return error})
+    return this.http.put<any>(this.url + '/' + id, data, httpOptions).pipe(
+      tap((data: any) => console.log('edit successful ' + JSON.stringify(data))),
+      catchError(error => { return error })
     );
 
   }
 
-
+  deleteProduct(id: number): Observable<any> {
+    return this.http.delete<any>(this.url + '/' + id).pipe(
+      catchError(error => { return error })
+    );
+  }
 
 }

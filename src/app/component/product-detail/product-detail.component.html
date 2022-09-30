@@ -1,6 +1,6 @@
-<div class="container">
+<!-- <div class="container">
   <button class="btn btn-secondary" id="btn-edit" [routerLink]="['/product-edit', product.id]">Sửa thông tin sản phẩm</button>
-</div>
+</div> -->
 
 <div class="container" *ngIf="product">
   <div class="card">
@@ -42,6 +42,11 @@
             <span class="color blue"></span>
           </h5> -->
           <div class="action">
+            <p>Chọn số lượng mua:
+              <button class="desc_number" (click)="giamsl()">-</button>
+              <input type="number" [(ngModel)] = "soluongchon" style="width : 10%">
+              <button class="incr_number" (click)="tangsl()">+</button>
+            </p>
             <button class="add-to-cart btn btn-default" type="button" (click)="addtocart(product)">Thêm vào giỏ
               hàng</button>
             <!-- <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button> -->

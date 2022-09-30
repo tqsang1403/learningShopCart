@@ -1,25 +1,24 @@
 <header>
   <div class="navbar navbar-dark bg-primary shadow-sm">
-    <div class="navbar-brand align-item-center d-flex" >
+    <div class="navbar-brand align-item-center d-flex">
       <i style="font-size: 40px;" class="fas fa-shipping-fast" routerLink="products">
 
       </i>
       <strong style="font-size: 30px;" routerLink="products">Shoppingg</strong>
 
       <div class="form-group">
-        <input type="text" class="form-control" placeholder="Search products">
+        <!-- <input type="text" class="form-control" placeholder="Search products"> -->
       </div>
-      <span class="fas fa-search search-icon"></span>
+      <!-- <span class="fas fa-search search-icon"></span> -->
     </div>
 
 
     <button class="btn btn-primary" style="margin-right: 10px;" routerLink="cart">
-      <i style="font-size: 30px;" class="fas fa-cart-plus" >
+      <i style="font-size: 30px;" class="fas fa-cart-plus">
       </i>
       <div class="badge bg-danger" style="font-size: 10px;">
-      {{totalItem}}</div>
+        {{totalItem}}</div>
     </button>
   </div>
 
 </header>
-
