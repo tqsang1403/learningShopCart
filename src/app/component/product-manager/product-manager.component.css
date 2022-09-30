@@ -4,3 +4,7 @@ a {
 .fa-trash{
   color: red;
 }
+#btn_del {
+  border: none;
+  background-color: transparent;
+}

@@ -19,6 +19,7 @@ export class ProductDetailComponent implements OnInit {
   listproduct: Product[] = [];
   listproduct2: Product[] = [];
   public soluongchon: number = 1;
+  public soluongsp: number = 0;
 
   constructor(
     private router: Router,
@@ -28,6 +29,8 @@ export class ProductDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+
     this.api.getProduct().subscribe((res: any) => {
       this.listproduct2 = res;
       console.log(JSON.stringify(this.listproduct));
@@ -43,7 +46,8 @@ export class ProductDetailComponent implements OnInit {
     this.product = this.listproduct.find(item => item.id === this._id);
     this.product2 = this.listproduct.find(item => item.id === this._id);
     console.log(JSON.stringify(this.product));
-
+    const sl = this.product.quantity;
+    this.soluongsp = sl;
 
 
   }

@@ -28,6 +28,7 @@ export class ProductsComponent implements OnInit {
   addtoCart(item: Product) {
     if (this.soluongchon < 1) {
       window.alert('Số lượng mua phải lớn hơn 1!');
+      this.soluongchon = 1;
     } else {
       this.cartService.addtoCart(item, this.soluongchon);
 
@@ -43,6 +44,7 @@ export class ProductsComponent implements OnInit {
   giamsl() {
     if (this.soluongchon <= 1) {
       window.alert('Số lượng mua không thể nhỏ hơn 1');
+
     } else {
       this.soluongchon--;
     }

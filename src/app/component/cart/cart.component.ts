@@ -88,6 +88,7 @@ export class CartComponent implements OnInit {
   }
 
   checkOut() {
+    localStorage.setItem('mycart',JSON.stringify(this.cartItem));
     window.alert('Thanh toán đơn hàng thành công!');
     this.clear();
   }

@@ -10,7 +10,14 @@
   border-radius: 0.25rem;
 }
 
+.card .chon_so_luong {
+  display: none;
+}
 
+.card:hover .chon_so_luong{
+
+  display: contents;
+}
 
 .item img{
   width: 64px;
@@ -41,6 +48,13 @@
 
 
 .card {
+  padding: 9px;
+  margin: 12px;
+  width: 300px;
+  height: 400px;
+}
+
+.card:hover{
   padding: 9px;
   margin: 12px;
   width: 300px;

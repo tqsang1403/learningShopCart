@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="container-header">
+    <span class="header">
+      <h1>Danh sách hóa đơn</h1>
+
+    </span>
+  </div>
+  <div class="container-body">
+    <div class="table">
+      <table class="table table-content table-bordered">
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Mã hóa đơn</th>
+            <th>Mã người mua</th>
+            <th>Ngày tạo</th>
+            <th>Tổng tiền</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody *ngIf="invoice_list.length > 0">
+          <tr *ngFor="let item of invoice_list; let i = index">
+            <td> {{i + 1}}</td>
+            <td>{{ item.id }}</td>
+            <td>{{item.uid }}</td>
+            <td>{{item.createdDate}}</td>
+            <td>{{item.Total}}</td>
+            <td> <button class="btn btn-success" (click)="getInvoice_Detail(item.id)">Show Detail</button></td>
+            <td> <a href="" [routerLink]="['/invoice',item.id]" >Move to Details page</a></td>
+          </tr>
+        </tbody>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</div>

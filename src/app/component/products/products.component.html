@@ -11,12 +11,14 @@
         <h5 style="white-space:nowrap ; overflow:hidden;text-overflow:ellipsis;max-width:100ch;">{{i.name}}</h5>
         <p style="white-space:nowrap ; overflow:hidden;text-overflow:ellipsis;max-width:60ch;">{{i.description}}</p>
         <p>Price: {{i.price}} </p>
-        <hr>
-        <p class="chon_so_luong">Chọn số lượng mua:
-          <button class="desc_number" (click)="giamsl()">-</button>
-          <input type="number" [(ngModel)]="soluongchon" style="width : 25%">
-          <button class="incr_number" (click)="tangsl()">+</button>
-        </p>
+        <div class="chon_so_luong">
+          <hr>
+          <p>Chọn số lượng mua:
+            <button class="desc_number" (click)="giamsl()">-</button>
+            <input type="number" [(ngModel)]="soluongchon" style="width : 25%;text-align: right;">
+            <button class="incr_number" (click)="tangsl()">+</button>
+          </p>
+        </div>
         <button class="btn btn-primary" (click)="addtoCart(i)">Thêm vào giỏ</button>
       </div>
     </ng-container>

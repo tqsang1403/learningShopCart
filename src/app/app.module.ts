@@ -13,6 +13,9 @@ import { FormsModule } from '@angular/forms';
 import { ProductEditComponent } from './component/product-edit/product-edit.component';
 import { ProductManagerComponent } from './component/product-manager/product-manager.component';
 import { Notfound404Component } from './component/notfound404/notfound404.component';
+import { InvoicesComponent } from './component/invoices/invoices.component';
+import { InvoiceDetailComponent } from './component/invoice-detail/invoice-detail.component';
+import { HomeComponent } from './component/home/home.component';
 
 
 
@@ -27,6 +30,9 @@ import { Notfound404Component } from './component/notfound404/notfound404.compon
     ProductEditComponent,
     ProductManagerComponent,
     Notfound404Component,
+    InvoicesComponent,
+    InvoiceDetailComponent,
+    HomeComponent,
 
   ],
   imports: [
