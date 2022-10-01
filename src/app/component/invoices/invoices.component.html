@@ -1,15 +1,15 @@
 <ng-container *ngIf="invoice_list.length > 0; else NoInvoice">
   <div class="container">
-    <div class="container-header">
-      <span class="header">
-        <h1>Danh sách hóa đơn</h1>
-
-      </span>
-    </div>
+    <div class="container-header"></div>
     <div class="container-body">
       <div class="table">
-        <table class="table table-content table-bordered">
+        <table class="table table-content table-bordered table-hover">
           <thead>
+            <tr>
+              <td colspan="7">
+                <h1>Danh sách hóa đơn</h1>
+              </td>
+            </tr>
             <tr>
               <th>STT</th>
               <th>Mã hóa đơn</th>
@@ -17,17 +17,29 @@
               <th>Ngày tạo</th>
               <th>Tổng tiền</th>
               <th></th>
+              <th></th>
             </tr>
           </thead>
-          <tbody  >
+          <tbody>
             <tr *ngFor="let item of invoice_list; let i = index">
-              <td> {{i + 1}}</td>
+              <td>{{ i + 1 }}</td>
               <td>{{ item.id }}</td>
-              <td>{{item.uid }}</td>
-              <td>{{item.createdDate}}</td>
-              <td>{{item.Total}}</td>
-              <td> <button class="btn btn-success" (click)="getInvoice_Detail(item.id)">Show Detail</button></td>
-              <td> <a href="" [routerLink]="['/invoice',item.id]">Move to Details page</a></td>
+              <td>{{ item.uid }}</td>
+              <td>{{ item.createdDate }}</td>
+              <td>{{ item.Total }}</td>
+              <td>
+                <button
+                  class="btn btn-success"
+                  (click)="getInvoice_Detail(item.id)"
+                >
+                  Show Detail
+                </button>
+              </td>
+              <td>
+                <a href="" [routerLink]="['/invoice', item.id]"
+                  >Move to Details page</a
+                >
+              </td>
             </tr>
           </tbody>
           <tbody></tbody>
@@ -36,17 +48,15 @@
     </div>
   </div>
 
-
-  <button class="btn btn-primary" (click)="get_invoice_detail_list()">get all details</button>
-
+  <button class="btn btn-primary" (click)="get_invoice_detail_list()">
+    get all details
+  </button>
 </ng-container>
 
 <ng-template #NoInvoice>
   <div class="container">
-
-      <div class="alert alert-danger">
-        <h2>Chưa có hóa đơn nào được tạo !</h2>
-      </div>
+    <div class="alert alert-danger">
+      <h2>Chưa có hóa đơn nào được tạo !</h2>
     </div>
-
+  </div>
 </ng-template>
