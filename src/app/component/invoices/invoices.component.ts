@@ -12,7 +12,7 @@ export class InvoicesComponent implements OnInit {
   invoice_list: any = [];
   invoice_detail_list: Invoice_Detail[] = [];
   invoice_detail_list_depend_on_id: any = [];
-  invoice_id : any;
+
   constructor(
     private invoiceService: InvoiceService,
   ) { }
@@ -34,7 +34,7 @@ export class InvoicesComponent implements OnInit {
 
 
   getInvoice_Detail(id:any) {
-    this.invoice_id = 1;
+
     this.invoice_detail_list_depend_on_id = this.invoice_detail_list.filter((a:any) => a.invoice_id === Number(id));
     console.log('id nhan duoc khi click: ' +  id);
     console.log('chi tiet hoa don co: ' + JSON.stringify(this.invoice_detail_list_depend_on_id));
