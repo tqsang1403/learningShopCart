@@ -34,5 +34,12 @@ export class InvoiceService {
     );
   }
 
+  getInvoice_Detail_List(){
+    return this.http.get<any>(this.urlInvoice_detail).pipe(tap((res: any) => {
+     this.invoice_detail_list = res;
+   })
+   );
+ }
+
 
 }

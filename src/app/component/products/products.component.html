@@ -1,27 +1,41 @@
-<div class="container">
-  <!-- <div class="container-card">
-    <button class="btn-add btn btn-success " routerLink="/new-product">
-        Thêm sản phẩm mới
-    </button>
-  </div> -->
-  <div class="row">
-    <ng-container *ngFor="let i of productList">
-      <div class="card col-md-3">
-        <img [src]="i.imgUrl" alt="error img" [routerLink]="['/product-detail',i.id]">
-        <h5 style="white-space:nowrap ; overflow:hidden;text-overflow:ellipsis;max-width:100ch;">{{i.name}}</h5>
-        <p style="white-space:nowrap ; overflow:hidden;text-overflow:ellipsis;max-width:60ch;">{{i.description}}</p>
-        <p>Price: {{i.price}} </p>
-        <div class="chon_so_luong">
-          <hr>
-          <p>Chọn số lượng mua:
-            <button class="desc_number" (click)="giamsl()">-</button>
-            <input type="number" [(ngModel)]="soluongchon" style="width : 25%;text-align: right;">
-            <button class="incr_number" (click)="tangsl()">+</button>
-          </p>
-        </div>
-        <button class="btn btn-primary" (click)="addtoCart(i)">Thêm vào giỏ</button>
-      </div>
-    </ng-container>
+<ng-container *ngIf="productList.length > 0 ;else NoProduct">
+  <div class="container">
 
+    <div class="row">
+      <ng-container *ngFor="let i of productList">
+        <div class="card col-md-3">
+          <img [src]="i.imgUrl" alt="error img" [routerLink]="['/product-detail',i.id]">
+          <h5 style="white-space:nowrap ; overflow:hidden;text-overflow:ellipsis;max-width:100ch;">{{i.name}}</h5>
+          <p style="white-space:nowrap ; overflow:hidden;text-overflow:ellipsis;max-width:60ch;">{{i.description}}</p>
+          <p>Price: {{i.price}} </p>
+          <div class="chon_so_luong">
+            <hr>
+            <p>Chọn số lượng mua:
+              <button class="desc_number" (click)="giamsl()">-</button>
+              <input type="number" [(ngModel)]="soluongchon" style="width : 25%;text-align: right;">
+              <button class="incr_number" (click)="tangsl()">+</button>
+            </p>
+          </div>
+          <button class="btn btn-primary" (click)="addtoCart(i)">Thêm vào giỏ</button>
+        </div>
+      </ng-container>
+
+    </div>
   </div>
-</div>
+
+</ng-container>
+
+ <ng-template #NoProduct>
+
+  <div class="container">
+    <div class="container-header " style="margin-top: 20px;">
+      <h3>Bạn chưa có sản phẩm nào !</h3>
+    </div>
+     <div class="container-card">
+      <button class="btn-add btn btn-success " routerLink="/new-product">
+          Thêm sản phẩm mới ngay
+      </button>
+    </div>
+  </div>
+ </ng-template>
+
