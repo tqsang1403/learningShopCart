@@ -9,17 +9,16 @@ import { ApiService } from './api.service';
 export class CartService {
   constructor(
     private api: ApiService
-  )
-  {
+  ) {
     this.getListProduct();
     this.getCartData();
   }
 
-  public list_product_from_api : Product[] =[];
+  public list_product_from_api: Product[] = [];
   public cartData: Product[] = [];
 
   public totalItems = new BehaviorSubject<any>([]);
-
+  public totalItems2 = new BehaviorSubject<any>([]);
   addtoCart(product: Product, soluong: number) {
     let exist: any;
     let prod: any;
@@ -42,14 +41,16 @@ export class CartService {
       console.log('so luong sp khach chon : ' + soluong);
 
       if (exist) {
-        let tongtamtinh : number = exist.quantity + soluong;
+        let tongtamtinh: number = exist.quantity + soluong;
         console.log('tổng tạm tính: ' + tongtamtinh);
         if (tongtamtinh > itemQuantity) {
           window.alert('Số lượng mua không thể lớn hơn số lượng sản phẩm hiện có là: ' + itemQuantity);
           exist.quantity = exist.quantity;
+          this.setLs(this.cartData);
         } else {
           window.alert('Thêm sản phẩm vào giỏ hàng thành công!');
           exist.quantity += soluong;
+          this.setLs(this.cartData);
         }
       } else {
         if (soluong > itemQuantity) {
@@ -59,6 +60,7 @@ export class CartService {
           product.quantity = soluong;
           this.cartData.push(product);
           this.totalItems.next(this.cartData);
+          this.setLs(this.cartData);
 
         }
       }
@@ -71,12 +73,16 @@ export class CartService {
         //bị hiểu nhầm khi chưa có sản phẩm sẽ gán luôn giá trị trong array = số lượng chọn tay
         product.quantity = soluong;
         this.totalItems.next(this.cartData);
+        this.setLs(this.cartData);
       }
     }
   }
 
-  getListProduct(){
-    this.api.getProduct().subscribe((res:any)=>{
+  setLs(data: any) {
+    localStorage.setItem('carts', JSON.stringify(data));
+  }
+  getListProduct() {
+    this.api.getProduct().subscribe((res: any) => {
       return this.list_product_from_api = res;
     });
   }
@@ -97,10 +103,20 @@ export class CartService {
         this.totalItems.next(this.cartData);
       }
     });
+    this.setLs(this.cartData);
   }
 
   clearCart() {
     this.cartData = [];
     this.totalItems.next(this.cartData);
+    localStorage.removeItem('carts');
+  }
+
+
+
+  getlength() {
+    let a: any = localStorage.getItem('carts');
+    this.totalItems2 = JSON.parse(a);
+    return this.totalItems2;
   }
 }

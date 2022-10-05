@@ -18,7 +18,7 @@
         <tr>
           <td>{{ i + 1 }}</td>
           <td>{{ items.name }}</td>
-          <td>{{ items.description }}</td>
+          <td style="white-space:nowrap ; overflow:hidden;text-overflow:ellipsis;max-width:60ch;">{{ items.description }}</td>
           <td>
             <a href="" [routerLink]="['/product-detail', items.id]"><i class="fa-solid fa-circle-info"></i></a>
           </td>

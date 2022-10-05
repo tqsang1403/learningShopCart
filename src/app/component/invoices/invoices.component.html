@@ -17,7 +17,7 @@
               <th>Ngày tạo</th>
               <th>Tổng tiền</th>
               <th></th>
-              <th></th>
+               
             </tr>
           </thead>
           <tbody>
@@ -25,20 +25,21 @@
               <td>{{ i + 1 }}</td>
               <td>{{ item.id }}</td>
               <td>{{ item.uid }}</td>
-              <td>{{ item.createdDate }}</td>
+              <td>{{ item.createdDate | date: 'dd-MM-yyyy HH:mm:ss' }}</td>
               <td>{{ item.Total }}</td>
-              <td>
+              <!-- <td>
                 <button
-                  class="btn btn-success"
+                  class="btn btn-success" 
                   (click)="getInvoice_Detail(item.id)"
                 >
                   Show Detail
-                </button>
-              </td>
+              </button>
+              </td> -->
               <td>
-                <a href="" [routerLink]="['/invoice', item.id]"
-                  >Move to Details page</a
-                >
+              
+                  <a href="" [routerLink]="['/invoice', item.id]"
+                  >Details</a>
+                
               </td>
             </tr>
           </tbody>
@@ -48,9 +49,9 @@
     </div>
   </div>
 
-  <button class="btn btn-primary" (click)="get_invoice_detail_list()">
+  <!-- <button class="btn btn-primary" (click)="get_invoice_detail_list()">
     get all details
-  </button>
+  </button> -->
 </ng-container>
 
 <ng-template #NoInvoice>

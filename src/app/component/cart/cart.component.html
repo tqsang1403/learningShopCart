@@ -1,5 +1,8 @@
 <ng-container *ngIf="cartItem.length > 0; else EmptyCart" >
   <div class="container">
+    <div class="container-header">
+      
+    </div>
 
       <div class="card-table">
         <div class="card-product">
@@ -21,7 +24,7 @@
                 <td>{{i + 1}}</td>
                 <td>{{item.name}}</td>
                 <td> <img [src]="item.imgUrl" alt="img"></td>
-                <td style="width: 25%" >{{item.description}}</td>
+                <td style="white-space:nowrap ; overflow:hidden;text-overflow:ellipsis;max-width:60ch;">{{item.description}}</td>
                 <td style="width: 12%">
                   {{item.price | currency : 'USD'}}
                  </td>
@@ -38,18 +41,43 @@
                 <td><button class="btn btn-primary" routerLink="/products">Mua thêm</button></td>
                 <td><button class="btn btn-success" (click)="checkOut()">Thanh toán</button></td>
               </tr>
-              <tr>
-                <td colspan="4">
-                  <strong>Tổng: <span> {{totalProduct}} </span> sản phẩm </strong> <br>
-                  <strong>Tổng thanh toán: <span>{{totalPrice | currency : 'USD' }} </span>  </strong> </td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
+               
             </tbody>
           </table>
         </div>
+        <div class="invoice-info">
+          <div class="invoice-total">
+            <div class="total-item">
+              <strong>Tổng: <span> {{totalProduct}} </span> sản phẩm </strong>
+            </div>
+            <div class="total-price">
+              <strong>Tổng thanh toán: <span>{{totalPrice | currency : 'USD' }} </span>  </strong> 
+            </div>
+          </div>
+          <div class="info-user">
+            
+         <div class="form-control">
+          <header style="font-size:1.2rem; text-align: center; font-weight: 500;">
+            Thông tin khách hàng
+          </header>
 
+          <label for="user-name">Họ tên: </label>
+          <input type="text" class="form-control" name="user-name" placeholder="Vui lòng điền họ tên người nhận..." required>
+        
+          <label for="user-address">Địa chỉ: </label>
+          <input type="text" class="form-control" name="user-address" placeholder="Vui lòng điền địa chỉ người nhận..." required>
+        
+          <label for="user-phone">Số điện thoại: </label>
+          <input type="number" class="form-control" name="user-phone" placeholder="Vui lòng điền số điện thoại người nhận..." required>
+
+          <label for="user-email">Email: </label>
+          <input type="email" class="form-control" name="user-email" placeholder="Vui lòng điền email người nhận..." required>
+        
+        </div>
+          </div>
+         
+        </div>
+        
       </div>
 
   </div>

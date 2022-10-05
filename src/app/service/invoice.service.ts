@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, tap } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, tap } from 'rxjs';
 import { Invoice } from '../models/invoices';
 
 @Injectable({
@@ -10,7 +10,7 @@ export class InvoiceService {
   public invoice_list: Invoice[] = [];
   public invoice_detail_list: any;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   private urlInvoices =
     'https://633150d9cff0e7bf70ea4775.mockapi.io/api/invoices';
@@ -39,6 +39,22 @@ export class InvoiceService {
       tap((res: any) => {
         this.invoice_detail_list = res;
       })
+    );
+  }
+
+  postInvoice(data: any): Observable<any> {
+    return this.http.post<any>(this.urlInvoices, data).pipe(
+      tap((data: any) => console.log('add invoice success ' + JSON.stringify(data))
+      ),
+      catchError(error => { return error })
+    );
+  }
+
+  postInvoiceDetail(data: any) {
+    return this.http.post<any>(this.urlInvoice_detail, data).pipe(
+      tap((data: any) => console.log('add invoice detail success ' + JSON.stringify(data))
+      ),
+      catchError(error => { return error })
     );
   }
 }

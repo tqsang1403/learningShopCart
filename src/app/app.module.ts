@@ -16,7 +16,9 @@ import { Notfound404Component } from './component/notfound404/notfound404.compon
 import { InvoicesComponent } from './component/invoices/invoices.component';
 import { InvoiceDetailComponent } from './component/invoice-detail/invoice-detail.component';
 import { HomeComponent } from './component/home/home.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -34,12 +36,16 @@ import { HomeComponent } from './component/home/home.component';
     InvoiceDetailComponent,
     HomeComponent,
 
+
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { filter, map } from 'rxjs';
 import { Invoice, Invoice_Detail } from 'src/app/models/invoices';
 import { InvoiceService } from 'src/app/service/invoice.service';
+import { MatDialog } from '@angular/material/dialog';
+import { InvoiceDetailComponent } from '../invoice-detail/invoice-detail.component';
 
 @Component({
   selector: 'app-invoices',
@@ -13,7 +15,9 @@ export class InvoicesComponent implements OnInit {
   invoice_detail_list: Invoice_Detail[] = [];
   invoice_detail_list_depend_on_id: any = [];
 
-  constructor(private invoiceService: InvoiceService) {}
+  constructor(private invoiceService: InvoiceService,
+    private matdialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.invoiceService.getInvoices().subscribe((invoice: any) => {
@@ -29,8 +33,11 @@ export class InvoicesComponent implements OnInit {
     console.log('id nhan duoc khi click: ' + id);
     console.log(
       'chi tiet hoa don co: ' +
-        JSON.stringify(this.invoice_detail_list_depend_on_id)
+      JSON.stringify(this.invoice_detail_list_depend_on_id)
     );
+
+
+
   }
 
   get_invoice_detail_list() {
@@ -40,5 +47,5 @@ export class InvoicesComponent implements OnInit {
     });
   }
 
-  clickTest() {}
+  clickTest() { }
 }

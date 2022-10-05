@@ -33,7 +33,7 @@ export class ProductDetailComponent implements OnInit {
 
     this.api.getProduct().subscribe((res: any) => {
       this.listproduct2 = res;
-      console.log(JSON.stringify(this.listproduct));
+
     });
 
     this.listproduct = this.api.productList;

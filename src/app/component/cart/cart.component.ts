@@ -1,6 +1,9 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Invoice, Invoice_Detail } from 'src/app/models/invoices';
 import { ApiService } from 'src/app/service/api.service';
 import { CartService } from 'src/app/service/cart.service';
+import { InvoiceService } from 'src/app/service/invoice.service';
 import { Product } from '../products/product';
 
 @Component({
@@ -12,20 +15,29 @@ export class CartComponent implements OnInit {
 
 
   public cartItem: Product[] = [];
-  public grandTotal !: number;
+
   public totalPrice: number = 0;
   public totalProduct: number = 0;
   public listproduct: Product[] = [];
+  public createdDate: any = Date.now();
+  public invoice: any;
+  invoice_detail: any = [];
 
 
   constructor(
     private cartService: CartService,
-    private api: ApiService
-  ) { }
+    private api: ApiService,
+
+    private invoiceService: InvoiceService
+  ) {
+
+  }
 
 
   ngOnInit(): void {
 
+    //this.getCartfromLS();
+    console.log('today: ' + this.createdDate);
     this.cartService.getCartData().subscribe((items: any) => {
       this.cartItem = items;
       if (this.cartItem) this.getTotal(this.cartItem);
@@ -35,6 +47,24 @@ export class CartComponent implements OnInit {
       this.listproduct = res;
     })
 
+    this.cartItem.forEach
+      ((a: any) => {
+
+        this.invoice_detail.product_info = a,
+          this.invoice_detail.invoice_id = 1
+
+      }
+      ); console.log(this.invoice_detail);;
+
+
+  }
+
+
+
+
+  getCartfromLS() {
+    let arr: any = localStorage.getItem('carts');
+    this.cartItem = JSON.parse(arr);
   }
 
   getTotal(Data: any) {
@@ -54,6 +84,7 @@ export class CartComponent implements OnInit {
     console.log('remove ' + item.name);
     console.log('san pham con lai: ' + JSON.stringify(this.cartItem));
     this.getTotal(this.cartItem);
+    this.getCartfromLS();
   }
 
   clear() {
@@ -86,12 +117,52 @@ export class CartComponent implements OnInit {
     this.getTotal(this.cartItem);
 
   }
-
   checkOut() {
-    localStorage.setItem('mycart',JSON.stringify(this.cartItem));
-    window.alert('Thanh toán đơn hàng thành công!');
-    this.clear();
+    let invoice: any = {
+
+      uid: 1,
+      createdDate: this.createdDate,
+      Total: this.totalPrice,
+    };
+    var inv_dt = {
+      invoice_id: invoice.id,
+      product_id: 0,
+      product_name: '',
+      product_price: 0,
+      product_quantity: 0,
+    }
+
+
+    let confirms = confirm('Bạn có muốn thanh toán giỏ hàng này không ?');
+    if (confirms) {
+      this.invoiceService.postInvoice(invoice).subscribe((res: any) => {
+        if (res) {
+
+
+          this.invoiceService.postInvoiceDetail(this.invoice_detail).subscribe((ress: any) => {
+            localStorage.setItem('mycart', JSON.stringify(this.cartItem));
+            localStorage.setItem('invoice', JSON.stringify(invoice));
+            localStorage.setItem('invoice_detail', JSON.stringify(this.invoice_detail));
+
+            window.alert('Thanh toán đơn hàng thành công!');
+            this.clear();
+          });
+
+        }
+      });
+
+    }
+
+
   }
+
+  /* public id: number,
+  public name: string,
+  public quantity: number,
+  public price: number,
+  public description: string,
+  public imgUrl: string
+*/
 
 
 
