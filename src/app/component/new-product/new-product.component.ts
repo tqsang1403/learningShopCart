@@ -10,46 +10,30 @@ import { Product } from '../products/product';
 })
 export class NewProductComponent implements OnInit {
 
-  public product: Product = {
-    id: 0,
-    name: '',
-    quantity: 0,
-    price: 0,
-    description: '',
-    imgUrl: ''
+  public product = {
+    ProdName: '',
+    Price: 0,
+    PhotoFileName: ''
   };
+
+  ProductId!: string;
+  ProductName!: string;
+  Price!: number;
+  PhotoFileName!: string;
+  PhotoFilePath!: string;
+  url: any;
   constructor(
-    private router : Router,
-    private productService : ApiService
+    private router: Router,
+    private productService: ApiService
   ) { }
 
   ngOnInit(): void {
     console.log(JSON.stringify(this.product));
+    this.url = this.productService.urlPhoto;
   }
 
-  cancel(){
+  cancel() {
     this.router.navigate(['products']);
-  }
-
-  on_press_key(data: any) {
-    if (data !== '') {
-      console.log('value nhận từ edit link ảnh: ' + data.target.value);
-      console.log(data.target.value);
-      let i: any;
-      i = this.isImage(data.target.value)
-      if (i) {
-        this.product.imgUrl = data.target.value;
-      } else {
-
-        window.alert('Đường dẫn hình ảnh "' + data.target.value + '"' + ' không hợp lệ! Vui lòng nhập lại');
-        this.product.imgUrl = '';
-      }
-    }else if(data === ''){
-      console.log('chưa điền link ảnh');
-    }
-
-
-
   }
 
   isImage(url: any) {
@@ -57,30 +41,36 @@ export class NewProductComponent implements OnInit {
   }
 
   save() {
-    this.productService.addProduct(this.product).subscribe((response : any) => {
-      if(response){
+    var val = {
+
+      ProdName: this.ProductName,
+      Price: this.Price,
+      PhotoFileName: this.PhotoFileName
+    }
+    this.productService.addProduct(val).subscribe((response: any) => {
+      if (response) {
         window.alert('Thêm mới sản phẩm thành công!');
-        this.product = {
-          id:0,
-          name : '',
-          price: 0,
-          quantity : 0,
-          description : '',
-          imgUrl : ''
-        };
-      }else{
-        window.alert(Error + response);
+        this.ProductName = '';
+        this.Price = 0;
+        this.PhotoFileName = '';
+      } else {
+        alert('Thêm sản phẩm thất bại! hãy thử lại!');
       }
     })
 
-    console.log('sản phẩm sau khi nhập: '
-      + JSON.stringify(
-        this.product.name + ' /'
-        + this.product.price + ' /'
-        + this.product.quantity + ' /'
-        + this.product.description + ' /'
-        + this.product.imgUrl
-      ))
+    console.log('sản phẩm sau khi nhập: ' + JSON.stringify(this.product));
   }
 
+  uploadPhoto(event: any) {
+    var file = event.target.files[0];
+
+
+    const formData: FormData = new FormData();
+    formData.append('uploadedFile', file, file.name);
+
+    this.productService.uploadPhoto(formData).subscribe((data: any) => {
+      this.PhotoFileName = data.toString();
+      this.PhotoFilePath = this.productService.urlPhoto + this.PhotoFileName;
+    })
+  }
 }

@@ -9,14 +9,14 @@
         <div class="preview col-md-6">
 
           <div class="preview-pic tab-content">
-            <div class="tab-pane active" id="pic-1"><img *ngIf="product.imgUrl" [src]="product.imgUrl" alt="img-demo" /></div>
+            <div class="tab-pane active" id="pic-1"><img *ngIf="product.PhotoFileName" src="{{urlPhoto}}{{product.PhotoFileName}}" alt="img-demo" /></div>
 
 
           </div>
 
         </div>
         <div class="details col-md-6">
-          <h3 class="product-title">{{product.name}}</h3>
+          <h3 class="product-title">{{product.ProdName}}</h3>
           <div class="rating">
             <div class="stars">
               <span class="fa fa-star checked"></span>
@@ -25,10 +25,10 @@
               <span class="fa fa-star"></span>
               <span class="fa fa-star"></span>
             </div>
-            <span class="review-no">{{soluongsp}} sản phẩm</span>
+             
           </div>
-          <p class="product-description">{{product.description}}</p>
-          <h4 class="price">Giá hiện tại: <span>{{product.price | currency : 'USD'}}</span></h4>
+          <p class="product-description">Đây là sản phẩm gì đó...</p>
+          <h4 class="price">Giá hiện tại: <span>{{product.Price | number}} </span>VND</h4>
           <p class="vote"><strong>91%</strong> người dùng thích sản phẩm này! </p>
           <!-- <h5 class="sizes">sizes:
             <span class="size" data-toggle="tooltip" title="small">s</span>
@@ -56,3 +56,4 @@
     </div>
   </div>
 </div>
+

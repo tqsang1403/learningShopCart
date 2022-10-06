@@ -1,34 +1,25 @@
 <div class="container">
   <div class="table">
     <div class="table-head">
-      <h4></h4>
+      
     </div>
     <div class="table-row">
-      <table class="table table-content table-bordered">
+      <table class="table table-content table-bordered" id="content">
         <thead>
           <tr>
-            <td
-              colspan="4"
+            <th
+              colspan="5"
               style="font-size: 35px; text-align: center; font-weight: 500"
             >
               Chi tiết hóa đơn có mã: <span> {{ invoice_id }} </span>
-            </td>
-            <td colspan="2" style="align-items: center; text-align: center">
-              <button
-                class="btn btn-primary"
-                (click)="back()"
-                style="margin: 5px 0"
-              >
-                Quay lại
-              </button>
-            </td>
+          </th>
           </tr>
           <tr>
-            <td>STT</td>
-            <td>Tên sản phẩm</td>
-            <td>Giá</td>
-            <td>Số lượng</td>
-            <td>Tổng</td>
+            <th>STT</th>
+            <th>Mã sản phẩm</th>
+            <th>Giá(VNĐ)</th>
+            <th>Số lượng</th>
+            <th>Thành tiền(VNĐ)</th>
           </tr>
         </thead>
         <tbody>
@@ -36,15 +27,16 @@
             *ngFor="let item of invoice_detail_list_depend_on_id; let i = index"
           >
             <td>{{ i + 1 }}</td>
-            <td>{{ item.product_name }}</td>
-            <td>{{ item.product_price | currency: "USD" }}</td>
-            <td>{{ item.product_quantity }}</td>
+            <td>{{ item.ProdID}}</td>
+            <td>{{ item.IntoMoney / item.Amount | number}}</td>
+            <td>{{ item.Amount}}</td>
             <td>
-              {{ item.product_price * item.product_quantity | currency: "USD" }}
+              {{ item.IntoMoney | number }}
             </td>
           </tr>
         </tbody>
       </table>
+      <button class="btn btn-primary" (click)="Print()">In hóa đơn</button>
     </div>
   </div>
 </div>

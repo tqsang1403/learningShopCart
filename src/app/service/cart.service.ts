@@ -10,82 +10,99 @@ export class CartService {
   constructor(
     private api: ApiService
   ) {
-    this.getListProduct();
+
     this.getCartData();
   }
 
   public list_product_from_api: Product[] = [];
-  public cartData: Product[] = [];
+  public cartData: any = [];
 
   public totalItems = new BehaviorSubject<any>([]);
-  public totalItems2 = new BehaviorSubject<any>([]);
-  addtoCart(product: Product, soluong: number) {
-    let exist: any;
-    let prod: any;
-    if (this.cartData.length > 0) {
-      exist = this.cartData.find(
-        (item) => {
 
-          return item.id === product.id;
-        },
-        (prod = this.list_product_from_api.find((item) => {
+  // addtoCart(product: Product, soluong: number) {
+  //   let exist: any;
+  //   let prod: any;
+  //   if (this.cartData.length > 0) {
+  //     exist = this.cartData.find(
+  //       (item) => {
 
-          return product.id === item.id;
-        }))
-      );
+  //         return item.id === product.id;
+  //       },
+  //       (prod = this.list_product_from_api.find((item) => {
 
-      let itemQuantity: number;
-      itemQuantity = prod.quantity;
+  //         return product.id === item.id;
+  //       }))
+  //     );
 
-      console.log('so luong sp co san: ' + itemQuantity);
-      console.log('so luong sp khach chon : ' + soluong);
+  //     let itemQuantity: number;
+  //     itemQuantity = prod.quantity;
 
-      if (exist) {
-        let tongtamtinh: number = exist.quantity + soluong;
-        console.log('tổng tạm tính: ' + tongtamtinh);
-        if (tongtamtinh > itemQuantity) {
-          window.alert('Số lượng mua không thể lớn hơn số lượng sản phẩm hiện có là: ' + itemQuantity);
-          exist.quantity = exist.quantity;
-          this.setLs(this.cartData);
-        } else {
-          window.alert('Thêm sản phẩm vào giỏ hàng thành công!');
-          exist.quantity += soluong;
-          this.setLs(this.cartData);
-        }
-      } else {
-        if (soluong > itemQuantity) {
-          window.alert('số lượng mua không thể lớn hơn số lượng sản phẩm hiện có là: ' + itemQuantity);
-        } else {
-          window.alert('Thêm sản phẩm vào giỏ hàng thành công!');
-          product.quantity = soluong;
-          this.cartData.push(product);
-          this.totalItems.next(this.cartData);
-          this.setLs(this.cartData);
+  //     console.log('so luong sp co san: ' + itemQuantity);
+  //     console.log('so luong sp khach chon : ' + soluong);
 
-        }
-      }
+  //     if (exist) {
+  //       let tongtamtinh: number = exist.quantity + soluong;
+  //       console.log('tổng tạm tính: ' + tongtamtinh);
+  //       if (tongtamtinh > itemQuantity) {
+  //         window.alert('Số lượng mua không thể lớn hơn số lượng sản phẩm hiện có là: ' + itemQuantity);
+  //         exist.quantity = exist.quantity;
+  //         this.setLs(this.cartData);
+  //       } else {
+  //         window.alert('Thêm sản phẩm vào giỏ hàng thành công!');
+  //         exist.quantity += soluong;
+  //         this.setLs(this.cartData);
+  //       }
+  //     } else {
+  //       if (soluong > itemQuantity) {
+  //         window.alert('số lượng mua không thể lớn hơn số lượng sản phẩm hiện có là: ' + itemQuantity);
+  //       } else {
+  //         window.alert('Thêm sản phẩm vào giỏ hàng thành công!');
+  //         product.quantity = soluong;
+  //         this.cartData.push(product);
+  //         this.totalItems.next(this.cartData);
+  //         this.setLs(this.cartData);
+  //       }
+  //     }
+  //   } else {
+  //     if (soluong > product.quantity) {
+  //       window.alert('số lượng mua không thể lớn hơn số lượng sản phẩm hiện có là: ' + product.quantity);
+  //     } else {
+  //       window.alert('Thêm sản phẩm vào giỏ hàng thành công!');
+  //       this.cartData.push(product);
+  //       //bị hiểu nhầm khi chưa có sản phẩm sẽ gán luôn giá trị trong array = số lượng chọn tay
+  //       product.quantity = soluong;
+  //       this.totalItems.next(this.cartData);
+  //       this.setLs(this.cartData);
+  //     }
+  //   }
+  // }
+  addtoCart(data: any, sl: number) {
+    if (this.cartData.length === 0) {
+      data.amount = sl;
+      this.cartData.push(data);
+      this.totalItems.next(this.cartData);
+      this.setLs(this.cartData);
     } else {
-      if (soluong > product.quantity) {
-        window.alert('số lượng mua không thể lớn hơn số lượng sản phẩm hiện có là: ' + product.quantity);
-      } else {
-        window.alert('Thêm sản phẩm vào giỏ hàng thành công!');
-        this.cartData.push(product);
-        //bị hiểu nhầm khi chưa có sản phẩm sẽ gán luôn giá trị trong array = số lượng chọn tay
-        product.quantity = soluong;
-        this.totalItems.next(this.cartData);
+      var exist = this.cartData.find((item: any) => Number(item.ID) === Number(data.ID));
+      if (exist) {
+        exist.amount += sl;
         this.setLs(this.cartData);
+        this.totalItems.next(this.cartData);
+      } else {
+        data.amount = sl;
+        this.cartData.push(data);
+        this.setLs(this.cartData);
+        this.totalItems.next(this.cartData);
       }
     }
+    this.setLs(this.cartData);
+    this.totalItems.next(this.cartData);
   }
 
   setLs(data: any) {
-    localStorage.setItem('carts', JSON.stringify(data));
+    localStorage.setItem('gio-hang', JSON.stringify(data));
   }
-  getListProduct() {
-    this.api.getProduct().subscribe((res: any) => {
-      return this.list_product_from_api = res;
-    });
-  }
+
 
   setCartData(data: any) {
     this.cartData.push(...data);
@@ -96,27 +113,23 @@ export class CartService {
   }
 
 
-  removeItem(product: Product) {
+  removeItem(product: any) {
     this.cartData.map((item: any, index: any) => {
-      if (product.id === item.id) {
+      if (product.ID === item.ID) {
         this.cartData.splice(index, 1);
-        this.totalItems.next(this.cartData);
+
       }
     });
     this.setLs(this.cartData);
+    this.totalItems.next(this.cartData);
   }
 
   clearCart() {
     this.cartData = [];
     this.totalItems.next(this.cartData);
-    localStorage.removeItem('carts');
+    localStorage.removeItem('gio-hang');
   }
 
 
 
-  getlength() {
-    let a: any = localStorage.getItem('carts');
-    this.totalItems2 = JSON.parse(a);
-    return this.totalItems2;
-  }
 }

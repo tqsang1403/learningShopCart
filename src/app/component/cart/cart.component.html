@@ -15,22 +15,22 @@
                 <th>Mô tả</th>
                 <th>Giá</th>
                 <th>Số lượng</th>
-                <th>Tổng</th>
+                <th>Tổng tạm tính</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let item of cartItem;let i = index">
                 <td>{{i + 1}}</td>
-                <td>{{item.name}}</td>
-                <td> <img [src]="item.imgUrl" alt="img"></td>
-                <td style="white-space:nowrap ; overflow:hidden;text-overflow:ellipsis;max-width:60ch;">{{item.description}}</td>
+                <td>{{item.ProdName}}</td>
+                <td> <img src="http://localhost:44383/Photos/{{item.PhotoFileName}}" alt="img"></td>
+                <td style="white-space:nowrap ; overflow:hidden;text-overflow:ellipsis;max-width:60ch;">Một sản phẩm gì đó chắc chắn sẽ hữu ích...</td>
                 <td style="width: 12%">
-                  {{item.price | currency : 'USD'}}
+                  {{item.Price | number}}
                  </td>
                 <td style="width: 12%">
-                  <input type="number" class="qty" [value]=" item.quantity" (blur)="validateInput($event,i)" style="width:55%;text-align:center;"></td>
-                <td style="width: 12%">{{ item.quantity * item.price | currency : 'USD' }}</td>
+                  <input type="number" class="qty" [value]=" item.amount" (blur)="validateInput($event,i)" style="width:55%;text-align:center;"></td>
+                <td style="width: 12%">{{ item.amount * item.Price | number }}</td>
                 <td>
                   <i class="fas fa-trash-alt" (click)="removeItem(item)"></i>
                 </td>
@@ -62,16 +62,16 @@
           </header>
 
           <label for="user-name">Họ tên: </label>
-          <input type="text" class="form-control" name="user-name" placeholder="Vui lòng điền họ tên người nhận..." required>
+          <input type="text" class="form-control" name="user-name" placeholder="Vui lòng điền họ tên người nhận..." required [(ngModel)] = "customer.Name" >
         
           <label for="user-address">Địa chỉ: </label>
-          <input type="text" class="form-control" name="user-address" placeholder="Vui lòng điền địa chỉ người nhận..." required>
+          <input type="text" class="form-control" name="user-address" placeholder="Vui lòng điền địa chỉ người nhận..." required [(ngModel)] = "customer.Address">
         
           <label for="user-phone">Số điện thoại: </label>
-          <input type="number" class="form-control" name="user-phone" placeholder="Vui lòng điền số điện thoại người nhận..." required>
+          <input type="number" class="form-control" name="user-phone" placeholder="Vui lòng điền số điện thoại người nhận..." required [(ngModel)] = "customer.Phone">
 
           <label for="user-email">Email: </label>
-          <input type="email" class="form-control" name="user-email" placeholder="Vui lòng điền email người nhận..." required>
+          <input type="email" class="form-control" name="user-email" placeholder="Vui lòng điền email người nhận..." required [(ngModel)] = "customer.Email">
         
         </div>
           </div>

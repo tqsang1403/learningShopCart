@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { InvoiceService } from 'src/app/service/invoice.service';
 import { filter, map } from 'rxjs';
+import * as jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
+import { ApiService } from 'src/app/service/api.service';
 @Component({
   selector: 'app-invoice-detail',
   templateUrl: './invoice-detail.component.html',
@@ -13,9 +15,10 @@ export class InvoiceDetailComponent implements OnInit {
   invoice_detail_list_depend_on_id: any = [];
   public invoice_id: any;
   constructor(
-    private invoiceService: InvoiceService,
-    private route: ActivatedRoute
-  ) {}
+
+    private route: ActivatedRoute,
+    private api: ApiService
+  ) { }
 
   ngOnInit(): void {
     this.getID();
@@ -26,9 +29,12 @@ export class InvoiceDetailComponent implements OnInit {
     //     'invoice detail list: ' + JSON.stringify(this.invoice_detail_list)
     //   );
     // });
-    this.invoice_detail_list = this.invoiceService.invoice_detail_list;
+    this.api.GetInvoiceDetail().subscribe((res: any) => {
+      this.invoice_detail_list = res;
+      this.invoice_detail_list_depend_on_id = this.invoice_detail_list.filter((a: any) => Number(a.ReceiptID) === Number(this.invoice_id));
+    });
 
-    this.getInvoice();
+
   }
 
   getID() {
@@ -38,16 +44,30 @@ export class InvoiceDetailComponent implements OnInit {
     });
   }
 
-  getInvoice() {
-    this.invoice_detail_list_depend_on_id = this.invoice_detail_list.filter(
-      (d: any) => d.invoice_id === Number(this.invoice_id)
-    );
-    console.log(
-      'invoice_on_id: ' + JSON.stringify(this.invoice_detail_list_depend_on_id)
-    );
-  }
+
 
   back() {
     history.back();
+  }
+
+  Print() {
+    var data = document.getElementById('content')!;
+    html2canvas(data).then(canvas => {
+      // Few necessary setting options
+      var imgWidth = 208;
+      var pageHeight = 295;
+      var imgHeight = canvas.height * imgWidth / canvas.width;
+      var heightLeft = imgHeight;
+      var left = 5;
+      var top = 10;
+      const contentDataURL = canvas.toDataURL('image/png')
+      let pdf = new jspdf.jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
+      var position = 0;
+      pdf.addImage(contentDataURL, 'PNG', left, top, imgWidth, imgHeight)
+      pdf.output('dataurlnewwindow');
+      // pdf.save('new-file.pdf'); // Generated PDF
+
+
+    });
   }
 }

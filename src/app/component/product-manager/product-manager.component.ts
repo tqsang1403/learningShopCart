@@ -10,7 +10,7 @@ import { Product } from '../products/product';
 })
 export class ProductManagerComponent implements OnInit {
 
-  public product_list: Product[] = [];
+  public product_list: any = [];
   constructor(
     private api: ApiService,
     private router: Router

@@ -2,48 +2,38 @@
   <div class="container">
     <div class="container-header"></div>
     <div class="container-body">
+      
       <div class="table">
+        <div class="table-header">
+          <h1>Danh sách hóa đơn</h1>
+        </div>
         <table class="table table-content table-bordered table-hover">
           <thead>
             <tr>
-              <td colspan="7">
-                <h1>Danh sách hóa đơn</h1>
-              </td>
-            </tr>
-            <tr>
               <th>STT</th>
               <th>Mã hóa đơn</th>
-              <th>Mã người mua</th>
-              <th>Ngày tạo</th>
-              <th>Tổng tiền</th>
+              <th>Ngày mua</th>
+              <th>Khách hàng</th>
+              <th>Tổng tiền(VNĐ)</th>
               <th></th>
-               
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let item of invoice_list; let i = index">
               <td>{{ i + 1 }}</td>
-              <td>{{ item.id }}</td>
-              <td>{{ item.uid }}</td>
-              <td>{{ item.createdDate | date: 'dd-MM-yyyy HH:mm:ss' }}</td>
-              <td>{{ item.Total }}</td>
-              <!-- <td>
-                <button
-                  class="btn btn-success" 
-                  (click)="getInvoice_Detail(item.id)"
-                >
-                  Show Detail
-              </button>
-              </td> -->
+              <td>{{ item.ID }}</td>
+              <td>{{ item.CreateDate | date: 'dd-MM-yyyy HH:mm:ss' }}</td>
+              <td>{{ item.CreateStaff }}</td>
+              <td>{{ item.TotalMoney | number}} </td>
               <td>
               
-                  <a href="" [routerLink]="['/invoice', item.id]"
-                  >Details</a>
+                  <a href="" [routerLink]="['/invoice', item.ID]"
+                  ><i class="fa-solid fa-circle-info"></i></a>
                 
               </td>
             </tr>
           </tbody>
-          <tbody></tbody>
+          
         </table>
       </div>
     </div>

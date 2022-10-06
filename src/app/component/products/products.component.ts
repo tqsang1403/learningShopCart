@@ -10,10 +10,10 @@ import { Product } from './product';
   styleUrls: ['./products.component.css'],
 })
 export class ProductsComponent implements OnInit {
-  public productList: Product[] = [];
+  public productList: any = [];
   public soluongchon: number = 1;
 
-  constructor(private api: ApiService, private cartService: CartService) {}
+  constructor(private api: ApiService, private cartService: CartService) { }
 
   ngOnInit(): void {
     this.api.getProduct().subscribe((res: any) => {
